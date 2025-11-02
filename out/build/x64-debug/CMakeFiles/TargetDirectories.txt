@@ -1,0 +1,9 @@
+D:/MyERP/bpmn-cpp-lib/out/build/x64-debug/CMakeFiles/bpmn_engine.dir
+D:/MyERP/bpmn-cpp-lib/out/build/x64-debug/CMakeFiles/bpmn_engine_tests.dir
+D:/MyERP/bpmn-cpp-lib/out/build/x64-debug/CMakeFiles/bpmn_demo.dir
+D:/MyERP/bpmn-cpp-lib/out/build/x64-debug/CMakeFiles/test.dir
+D:/MyERP/bpmn-cpp-lib/out/build/x64-debug/CMakeFiles/edit_cache.dir
+D:/MyERP/bpmn-cpp-lib/out/build/x64-debug/CMakeFiles/rebuild_cache.dir
+D:/MyERP/bpmn-cpp-lib/out/build/x64-debug/CMakeFiles/list_install_components.dir
+D:/MyERP/bpmn-cpp-lib/out/build/x64-debug/CMakeFiles/install.dir
+D:/MyERP/bpmn-cpp-lib/out/build/x64-debug/CMakeFiles/install/local.dir
