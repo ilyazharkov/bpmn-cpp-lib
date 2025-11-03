@@ -49,6 +49,7 @@ namespace bpmn {
         db::DatabaseConfig config_;
         std::unique_ptr<BpmnParser> parser_;
         std::unique_ptr<ProcessExecutor> executor_;
+        std::unique_ptr<db::Database> database_;
         std::unordered_map<std::string, std::shared_ptr<Process>> processCache_;
 
         // Состояние движка

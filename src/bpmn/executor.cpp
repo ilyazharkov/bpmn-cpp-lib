@@ -45,8 +45,11 @@ namespace bpmn {
         return db_.getFormById(formId);
     };
 
-    ExecutionState& ProcessExecutor::getExecutionState(const std::string& instanceId) const {
-        return lastState_;
+    const ExecutionState& ProcessExecutor::getExecutionState(const std::string& instanceId) const {
+        if (!lastState_) {
+            throw std::runtime_error("No execution state available");
+        }
+        return *lastState_;
     };
 
     void ProcessExecutor::completeTask(const std::string& instance_id, const std::string& user_task, const std::string& user_task_callback) {
@@ -225,8 +228,14 @@ namespace bpmn {
     }
 
     void ProcessExecutor::saveState(const std::string& instance_id, ExecutionState& state) {
-        lastState_ = std::move(state);
-        db_.saveProcessInstance(instance_id, state.process_id, state.current_element, state.variables);
+        //Копируем состояние
+        std::string process_id = state.process_id;
+        std::string current_element = state.current_element;
+        std::map<std::string, std::string> variables = state.variables;
+        //Состояние сохраняем
+        lastState_ = std::make_unique<ExecutionState>(std::move(state));
+        //Сохраняем в БД
+        db_.saveProcessInstance(instance_id, process_id, current_element, variables);
     }
 
     ExecutionState ProcessExecutor::loadState(const std::string& instance_id) {

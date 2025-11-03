@@ -56,7 +56,7 @@ namespace bpmn {
         elementsById[elementId] = element;
     }
     
-    void Process::addSequenceFlow(const std::string& id, const std::string& sourceRef, const std::string& targetRef) {
+    void Process::addSequenceFlow(const std::string& id, const std::string& name, const std::string& sourceRef, const std::string& targetRef) {
         // Проверяем существование элементов
         auto sourceElement = getElement(sourceRef);
         auto targetElement = getElement(targetRef);
@@ -74,7 +74,7 @@ namespace bpmn {
         }
 
         // Создаем unique_ptr для потока
-        auto sequenceFlow = std::make_unique<SequenceFlow>(id, sourceRef, targetRef);
+        auto sequenceFlow = std::make_unique<SequenceFlow>(id, name, sourceRef, targetRef);
 
         // Создаем shared_ptr для карт доступа
         std::shared_ptr<SequenceFlow> sharedFlow = std::move(sequenceFlow);
@@ -101,14 +101,6 @@ namespace bpmn {
     const std::string Process::getStartEventId() const {
         return start_event_id;
     }
-    // Default implementations for flow elements
-    StartEvent::~StartEvent() = default;
-    EndEvent::~EndEvent() = default;
-    UserTask::~UserTask() = default;
-    
-    ParallelGateway::~ParallelGateway() = default;
-    ExclusiveGateway::~ExclusiveGateway() = default;
-
     // Helper functions
     namespace {
 

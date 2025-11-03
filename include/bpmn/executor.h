@@ -34,14 +34,14 @@ namespace bpmn {
         
         // Get output form by Id
         nlohmann::json getFormById(const std::string formId) const;
-        ExecutionState& getExecutionState(const std::string& instanceId) const;
+        const ExecutionState& getExecutionState(const std::string & instanceId) const;
         void completeTask(const std::string& instance_id, const std::string& user_task, const std::string& user_task_callback);
 
     private:
         std::random_device random_device_;
         std::mt19937 random_engine_;
         boost::uuids::random_generator uuid_generator_;
-        ExecutionState& lastState_;
+        std::unique_ptr<ExecutionState> lastState_;
         db::Database& db_;
 
         // Element type handlers

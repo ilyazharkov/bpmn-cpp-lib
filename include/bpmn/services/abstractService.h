@@ -13,6 +13,9 @@ namespace bpmn {
             
             std::future<json> execute(ExecutionState& state) override;
             ~ServiceTask() override;
+            ServiceTask(const std::string& id, const std::string& name)
+                : IService(id, name) {
+            }
         };
     }
 }

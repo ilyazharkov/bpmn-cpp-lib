@@ -178,12 +178,13 @@ namespace bpmn {
 
     void BpmnParser::parseSequenceFlow(xmlNodePtr node, Process& process) {
         std::string id = getAttribute(node, "id");
+        std::string name = getAttribute(node, "name");
         std::string sourceRef = getAttribute(node, "sourceRef");
         std::string targetRef = getAttribute(node, "targetRef");
 
         if (!id.empty() && !sourceRef.empty() && !targetRef.empty()) {
             try {
-                process.addSequenceFlow(id, sourceRef, targetRef);
+                process.addSequenceFlow(id, name, sourceRef, targetRef);
             }
             catch (const std::runtime_error& e) {
                 // Log warning but don't stop parsing

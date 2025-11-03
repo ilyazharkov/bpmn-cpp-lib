@@ -1,7 +1,9 @@
 #include <gtest/gtest.h>
 #include <bpmn/engine.h>
-#include <bpmn/config.h>
+#include <db/config.h>
 #include <filesystem>
+#include <fstream>
+#include <iostream>
 
 using namespace bpmn;
 

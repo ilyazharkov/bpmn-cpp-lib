@@ -6,11 +6,12 @@
   "dependencies": [
     "libxml2",
     "openssl",
-    "postgresql",
+    "libpq",
     "nlohmann-json",
     "flatbuffers",
     "boost-uuid",
-    "boost-algorithm"
+    "boost-algorithm",
+    "zlib"
   ],
   "features": {
     "tests": {

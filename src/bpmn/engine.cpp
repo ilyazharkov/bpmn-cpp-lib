@@ -12,17 +12,17 @@ namespace bpmn {
 
     // Фабричные методы
     std::unique_ptr<BpmnEngine> BpmnEngine::create(const db::DatabaseConfig& config) {
-        return std::make_unique<BpmnEngine>(config);
+        return std::unique_ptr<BpmnEngine>(new BpmnEngine(config));
     }
 
     std::unique_ptr<BpmnEngine> BpmnEngine::createFromConfig(const std::string& configPath) {
         auto config = db::DatabaseConfig::fromJson(configPath);
-        return std::make_unique<BpmnEngine>(config);
+        return std::unique_ptr<BpmnEngine>(new BpmnEngine(config));
     }
 
     std::unique_ptr<BpmnEngine> BpmnEngine::createFromEnvironment() {
         auto config = db::DatabaseConfig::fromEnvironment();
-        return std::make_unique<BpmnEngine>(config);
+        return std::unique_ptr<BpmnEngine>(new BpmnEngine(config));
     }
 
     // Конструктор
@@ -31,7 +31,9 @@ namespace bpmn {
 
         initializeDatabase();
         parser_ = std::make_unique<BpmnParser>();
-        executor_ = std::make_unique<ProcessExecutor>();
+        // Создаем Database и передаем в ProcessExecutor
+        database_ = std::make_unique<db::Database>(config_.getConnectionString());
+        executor_ = std::make_unique<ProcessExecutor>(*database_);
     }
 
     void BpmnEngine::initializeDatabase() {
